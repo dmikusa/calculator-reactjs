@@ -4,7 +4,11 @@
   "description": "A simple calculator written in React.js w/Redux",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:watch": "supervisor -q -n exit -x jest",
+    "build": "browserify index.js -t babelify --outfile bundle.js",
+    "watch": "watchify -v -t babelify index.js -o bundle.js",
+    "clean": "rm bundle.js"
   },
   "keywords": [
     "calc",
@@ -12,5 +16,22 @@
     "redux"
   ],
   "author": "Daniel Mikusa <dan@mikusa.com>",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "dependencies": {
+    "react": "^15.1.0",
+    "react-bootstrap": "^0.29.4",
+    "react-dom": "^15.1.0",
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2"
+  },
+  "devDependencies": {
+    "babel-jest": "^12.1.0",
+    "babel-preset-react": "^6.5.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.0.1",
+    "jest-cli": "^12.1.1",
+    "react-addons-test-utils": "^15.1.0",
+    "supervisor": "^0.10.0",
+    "watchify": "^3.7.0"
+  }
 }
