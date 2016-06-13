@@ -1,6 +1,6 @@
-export const ADD = '+';
-export const SUBTRACT = '-';
-export const MULTIPLY = '*';
-export const DIVIDE = '÷';
-export const EQUALS = '=';
-export const CLEAR = 'C';
+export const ADD = 'add';
+export const SUBTRACT = 'subtract';
+export const MULTIPLY = 'multiply';
+export const DIVIDE = 'divide';
+export const EQUALS = 'equals';
+export const CLEAR = 'clear';
