@@ -13,8 +13,7 @@ class Calculator extends Component {
 
     render() {
         return (
-            <div>
-                <h1>Calculator</h1>
+            <div id="calc-pane">
                 <input type="text" defaultValue="0" />
                 <div>
                     <Button onClick={this.handleSign} text="AC"/> 
@@ -41,7 +40,7 @@ class Calculator extends Component {
                     <Button onClick={this.handleSign} text="+"/> 
                 </div>
                 <div>
-                    <Button onClick={this.handleNumber} text="0"/> 
+                    <Button wide="true" onClick={this.handleNumber} text="0"/>
                     <Button onClick={this.handleNumber} text="."/> 
                     <Button onClick={this.handleNumber} text="="/> 
                 </div>

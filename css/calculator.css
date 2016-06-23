@@ -1,0 +1,30 @@
+#root {
+    width: 250px;
+    height: 250px;
+}
+
+#calc-pane {
+    height: 100%;
+}
+
+#calc-pane input {
+    width: 100%;
+    height: 25%;
+    text-align: right;
+    font-size: 20px;
+}
+
+#calc-pane div {
+    height: 15%;
+}
+
+#calc-pane div button {
+    width: 25%;
+    height: 100%;
+}
+
+#calc-pane div button.wide {
+    text-align: left;
+    padding-left: 1.8em;
+    width: 50%;
+}
