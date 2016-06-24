@@ -10,6 +10,7 @@ const initialState = {
 }
 
 export default function calculate(state = initialState, action) {
+    console.log("reducing: state [" + JSON.stringify(state) + "] action [" + JSON.stringify(action) + "]");
     let newState = {};
     switch (action.type) {
         case types.OPERATE:
@@ -27,6 +28,7 @@ export default function calculate(state = initialState, action) {
                 newState.lastAction = action.type;
                 newState.sign = action.operation;
             }
+            console.log("after: " + JSON.stringify(state));
             return newState;
         case types.PICK_NUMBER:
             newState = Object.assign({}, state);

@@ -1,5 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Calculator from './components/Calculator'
+import { Provider } from 'react-redux'
+import store from './store'
+import CalcBrain from './containers/CalcBrain'
 
-ReactDOM.render(<Calculator/>, document.getElementById('root'));
+ReactDOM.render(
+    <Provider store={store}>
+        <CalcBrain/>
+    </Provider>,
+    document.getElementById('root')
+);
