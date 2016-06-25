@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "test:watch": "jest --watch",
     "test:debug": "node debug --harmony ./node_modules/.bin/jest --runInBand",
     "build": "browserify index.js -t babelify --outfile bundle.js",
     "watch": "watchify -v -t babelify index.js -o bundle.js",
