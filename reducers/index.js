@@ -26,6 +26,9 @@ export default function calculate(state = initialState, action) {
             'value': value
         });
     } else if (action.type == types.OPERATE) {
+        if (action.operation == operations.CLEAR) {
+            state.stack = new Stack();
+        }
         if (state.stack.size > 0) {
             // if last action was an operation, discard it in favor of this operation
             let first = state.stack.first();

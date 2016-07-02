@@ -117,4 +117,12 @@ describe('calculate reducer', () => {
             stack: Stack([{'action_type': null, 'value': '9'}])
         });
     });
+    it('should clear the stack', () => {
+        expect(calculate({
+            stack: Stack([{'action_type': types.OPERATE, 'value': operations.SUBTRACT},
+                          {'action_type': types.PICK_NUMBER, 'value': '57'}])
+        }, actions.operate(operations.CLEAR))).toEqual({
+            stack: Stack()
+        });
+    });
 });
