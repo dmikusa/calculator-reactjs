@@ -1,45 +1,51 @@
 import * as types from '../constants/ActionTypes'
 import * as operations from '../constants/Operations'
 import * as funcs from '../functions/Operations'
+import { Stack } from 'immutable'
 
 const initialState = {
-    buffer: 0,
-    active: 0,
-    lastAction: types.PICK_NUMBER,
-    sign: operations.CLEAR
+    stack: Stack()
 }
 
 export default function calculate(state = initialState, action) {
-    console.log("reducing: state [" + JSON.stringify(state) + "] action [" + JSON.stringify(action) + "]");
-    let newState = {};
-    switch (action.type) {
-        case types.OPERATE:
-            newState = Object.assign({}, state, {
-                buffer: state.active,
-                sign: action.operation,
-                lastAction: action.type
-            });
-            const op = (action.operation in funcs) ? action.operation : state.sign;
-            if (op in funcs) {
-                if (state.lastAction != types.PICK_NUMBER || action.operation == operations.EQUALS) {
-                    newState.active = funcs[op](state.buffer, state.active);
-                    newState.buffer = 0;
-                }
-                newState.lastAction = action.type;
-                newState.sign = action.operation;
+    //console.log("Starting State: [" + JSON.stringify(state) + "] Action: [" + JSON.stringify(action) + "]");
+    state = Object.assign({}, state);
+    if (action.type === null || action.type == types.PICK_NUMBER) {
+        let value = action.number;
+        // if last action was pick number, append to that
+        let first = state.stack.first();
+        if (first && first.action_type == types.PICK_NUMBER) {
+            value = first.value + action.number;
+            state.stack = state.stack.pop();
+        }
+        if (first && first.action_type === null) {
+            state.stack = state.stack.pop();
+        }
+        state.stack = state.stack.push({
+            'action_type': action.type,
+            'value': value
+        });
+    } else if (action.type == types.OPERATE) {
+        if (state.stack.size > 0) {
+            // if last action was an operation, discard it in favor of this operation
+            let first = state.stack.first();
+            if (first && first.action_type == types.OPERATE) {
+                state.stack = state.stack.pop();
             }
-            console.log("after: " + JSON.stringify(state));
-            return newState;
-        case types.PICK_NUMBER:
-            newState = Object.assign({}, state);
-            if (state.lastAction == types.PICK_NUMBER) {
-                newState.active = state.active * 10 + action.number;
-            } else {
-                newState.active = action.number;
+            if (state.stack.size > 1 && (action.operation == operations.EQUALS || action.operation in funcs)) {
+                const stack = state.stack.toArray().reverse();
+                const op = stack.splice(1, 1)[0];
+                const result = funcs[op.value].apply(null, stack.map((cur) => { return Number(cur.value) }));
+                state.stack = Stack([{'action_type': null, 'value': result.toString()}]);
             }
-            newState.lastAction = action.type;
-            return newState;
-        default:
-            return state;
-    } 
+            if (action.operation != operations.EQUALS) {
+                state.stack = state.stack.push({
+                    'action_type': action.type,
+                    'value': action.operation
+                });
+            }
+        }
+    }
+    //console.log("Ending State: [" + JSON.stringify(state) + "]");
+    return state;
 }
