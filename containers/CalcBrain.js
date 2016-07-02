@@ -1,11 +1,22 @@
 import * as actions from '../actions'
+import * as types from '../constants/ActionTypes'
 import * as ops from '../constants/Operations'
 import { connect } from 'react-redux'
 import Calculator from '../components/Calculator'
 
+function getValueFromStack(stack) {
+    const first = stack.first();
+    if (first) {
+        return (first.action_type == types.OPERATE) ?
+                stack.pop().first().value : first.value;
+    } else {
+        return 0;
+    }
+}
+
 const mapStateToProps = (state) => {
     return {
-        value: state.active
+        value: getValueFromStack(state.stack)
     }
 }
 
@@ -30,10 +41,10 @@ const mapDispatchToProps = (dispatch) => {
     return {
         handleNumber: (e) => {
             console.log('handleNumber [' + e.target.textContent + ']');
-            dispatch(actions.pickNumber(parseInt(e.target.textContent)));
+            dispatch(actions.pickNumber(e.target.textContent));
         },
         handleSign: (e) => { 
-            console.log('handleNumber [' + e.target.textContent + ']');
+            console.log('handleSign [' + e.target.textContent + ']');
             dispatch(actions.operate(mapButtonToOperation(e.target.textContent)));
         }
     }
