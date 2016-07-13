@@ -21,3 +21,7 @@ export function clear(x, y) {
 export function negate(x) {
     return x * -1;
 }
+
+export function percent(x) {
+    return Number((x * 0.01).toFixed(12).replace(/0+$/, ''));
+}

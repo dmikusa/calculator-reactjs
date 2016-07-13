@@ -29,12 +29,12 @@ const mapButtonToOperation = (buttonValue) => {
         case "+":  return ops.ADD
         case "=":  return ops.EQUALS
         case "+/-": return ops.NEGATE
+        case "%":  return ops.PERCENT
         default:
             console.log("undefined: " + buttonValue);
     }
     //TODO: wire up these buttons
     //case ".": return ops.DECIMAL
-    //case "%": return ops.PERCENT
 }
 
 const mapDispatchToProps = (dispatch) => {

@@ -5,3 +5,4 @@ export const DIVIDE = 'divide';
 export const EQUALS = 'equals';
 export const CLEAR = 'clear';
 export const NEGATE = 'negate';
+export const PERCENT = 'percent';

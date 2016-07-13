@@ -18,4 +18,8 @@ describe('check calculator functions', () => {
         expect(funcs.negate(5)).toBe(-5);
         expect(funcs.negate(-5)).toBe(5);
     });
+    it('should return the percent value of a number', () => {
+        expect(funcs.percent(65)).toBe(0.65);
+        expect(funcs.percent(57)).toBe(0.57);
+    });
 });

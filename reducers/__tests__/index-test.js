@@ -132,4 +132,11 @@ describe('calculate reducer', () => {
             stack: Stack([{'action_type': null, 'value': '-57'}])
         });
     });
+    it('should calculate the percent for a number', () => {
+        expect(calculate({
+            stack: Stack([{'action_type': types.PICK_NUMBER, 'value': '57'}])
+        }, actions.operate(operations.PERCENT))).toEqual({
+            stack: Stack([{'action_type': null, 'value': '0.57'}])
+        });
+    });
 });
