@@ -32,7 +32,7 @@ class Calculator extends Component {
                 </div>
                 <div>
                     <Button wide="true" onClick={this.props.handleNumber} text="0"/>
-                    <Button onClick={this.props.handleSign} text="."/>
+                    <Button onClick={this.props.handleNumber} text="."/>
                     <Button onClick={this.props.handleSign} text="="/>
                 </div>
             </div>

@@ -33,8 +33,6 @@ const mapButtonToOperation = (buttonValue) => {
         default:
             console.log("undefined: " + buttonValue);
     }
-    //TODO: wire up these buttons
-    //case ".": return ops.DECIMAL
 }
 
 const mapDispatchToProps = (dispatch) => {

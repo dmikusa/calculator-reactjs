@@ -30,6 +30,20 @@ describe('calculate reducer', () => {
             stack: Stack([{'action_type': types.PICK_NUMBER, 'value': '572'}])
         });
     });
+    it('should handle decimal pressed', () => {
+        expect(calculate({
+            stack: Stack([{'action_type': types.PICK_NUMBER, 'value': '57'}])
+        }, actions.pickNumber('.'))).toEqual({
+            stack: Stack([{'action_type': types.PICK_NUMBER, 'value': '57.'}])
+        });
+    });
+    it('should handle a number pressed after a decimal', () => {
+        expect(calculate({
+            stack: Stack([{'action_type': types.PICK_NUMBER, 'value': '57.'}])
+        }, actions.pickNumber('3'))).toEqual({
+            stack: Stack([{'action_type': types.PICK_NUMBER, 'value': '57.3'}])
+        });
+    });
     it('should handle sign pressed with initial state', () => {
         expect(calculate(undefined, actions.operate(operations.SUBTRACT))).toEqual({
             stack: Stack()
