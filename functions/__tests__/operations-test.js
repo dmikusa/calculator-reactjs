@@ -14,4 +14,8 @@ describe('check calculator functions', () => {
     it('should divide two numbers', () => {
         expect(funcs.divide(8, 2)).toBe(4);
     });
+    it('should negate a number', () => {
+        expect(funcs.negate(5)).toBe(-5);
+        expect(funcs.negate(-5)).toBe(5);
+    });
 });

@@ -35,13 +35,22 @@ export default function calculate(state = initialState, action) {
             if (first && first.action_type == types.OPERATE) {
                 state.stack = state.stack.pop();
             }
+            // if unary operator, push action onto the stack
+            if (state.stack.size == 1 && action.operation == operations.NEGATE) {
+                state.stack = state.stack.push({
+                    'action_type': action.type,
+                    'value': action.operation
+                });
+            }
+            // actually perform the operation
             if (state.stack.size > 1 && (action.operation == operations.EQUALS || action.operation in funcs)) {
                 const stack = state.stack.toArray().reverse();
                 const op = stack.splice(1, 1)[0];
                 const result = funcs[op.value].apply(null, stack.map((cur) => { return Number(cur.value) }));
                 state.stack = Stack([{'action_type': null, 'value': result.toString()}]);
             }
-            if (action.operation != operations.EQUALS) {
+            // if binary operator, push action onto the stack
+            if (action.operation != operations.EQUALS && action.operation != operations.NEGATE) {
                 state.stack = state.stack.push({
                     'action_type': action.type,
                     'value': action.operation

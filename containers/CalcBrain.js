@@ -28,12 +28,12 @@ const mapButtonToOperation = (buttonValue) => {
         case "-":  return ops.SUBTRACT
         case "+":  return ops.ADD
         case "=":  return ops.EQUALS
+        case "+/-": return ops.NEGATE
         default:
             console.log("undefined: " + buttonValue);
     }
     //TODO: wire up these buttons
     //case ".": return ops.DECIMAL
-    //case "+/-": return ops.NEGATE
     //case "%": return ops.PERCENT
 }
 

@@ -125,4 +125,11 @@ describe('calculate reducer', () => {
             stack: Stack()
         });
     });
+    it('should negate a number', () => {
+        expect(calculate({
+            stack: Stack([{'action_type': types.PICK_NUMBER, 'value': '57'}])
+        }, actions.operate(operations.NEGATE))).toEqual({
+            stack: Stack([{'action_type': null, 'value': '-57'}])
+        });
+    });
 });

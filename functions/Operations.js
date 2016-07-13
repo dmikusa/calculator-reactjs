@@ -17,3 +17,7 @@ export function divide(x, y) {
 export function clear(x, y) {
     return 0;
 }
+
+export function negate(x) {
+    return x * -1;
+}
