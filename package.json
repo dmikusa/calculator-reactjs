@@ -6,8 +6,9 @@
   "scripts": {
     "test": "jest",
     "test:debug": "node debug --harmony ./node_modules/.bin/jest --runInBand",
-    "build": "browserify index.js -t babelify --outfile bundle.js",
-    "watch": "watchify -v -t babelify index.js -o bundle.js",
+    "build": "browserify index.js -t babelify --debug --outfile bundle.js",
+    "build:dist": "browserify index.js -t babelify | uglifyjs - | bundle-collapser - > bundle.min.js",
+    "watch": "watchify -v --debug -t babelify index.js -o bundle.js",
     "clean": "rm bundle.js"
   },
   "keywords": [
@@ -32,9 +33,11 @@
     "babel-preset-react": "^6.5.0",
     "babelify": "^7.3.0",
     "browserify": "^13.0.1",
+    "bundle-collapser": "^1.2.1",
     "jest-cli": "^12.1.1",
     "react-addons-test-utils": "^15.1.0",
     "supervisor": "^0.10.0",
+    "uglify-js": "^2.7.3",
     "watchify": "^3.7.0"
   }
 }
